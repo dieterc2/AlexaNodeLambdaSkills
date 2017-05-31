@@ -1,10 +1,17 @@
 import * as Alexa from "alexa-sdk"
+import * as request from "request"
 
 let handlers: Alexa.Handlers = {
   "AboutIntent": function() {
     let self: Alexa.Handler = this;
     let speechOutput = "This skill was written by Chris Dieter";
-    self.emit(":tellWithCard", speechOutput, "Chris' Skill", speechOutput);
+    let url = 'https://gcsp-vc-dosage-sched-sim.herokuapp.com/patient/product/dosage?pcpPatientId=1006221&vcProductId=olumiant';
+    request.get(url, function(error, resp, body){
+      speechOutput += body;
+      speechOutput += "asdf";
+      self.emit(":tellWithCard", speechOutput, "Chris' Skill", speechOutput);
+    });
+
   },
   "HelloIntent": function() {
     let self: Alexa.Handler = this;

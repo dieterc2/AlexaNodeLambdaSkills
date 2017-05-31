@@ -28,11 +28,7 @@ describe("Testing the HelloIntent", function() {
       "type": "IntentRequest",
       "requestId": "amzn1.echo-api.request.[unique-value-here]",
       "intent": {
-        "slots": {
-          "name": "Word",
-          "value": "yello",
-        },
-        "name": "HelloIntent",
+        "name": "AboutIntent",
       }
     }
     }, ctx);

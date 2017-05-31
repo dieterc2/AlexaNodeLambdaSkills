@@ -1,11 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Alexa = require("alexa-sdk");
+var request = require("request");
+var https = require("https");
 var handlers = {
     "AboutIntent": function () {
         var self = this;
-        var speechOutput = "This skill was written by Chris Dieter";
-        self.emit(":tellWithCard", speechOutput, "Chris' Skill", speechOutput);
+        var speechOutput;
+        var url = 'https://gcsp-vc-dosage-sched-sim.herokuapp.com/patient/product/dosage?pcpPatientId=1006221&vcProductId=olumiant';
+        const req = https.get(url, (res) => {
+          console.log('statusCode:', res.statusCode);
+          console.log('body:', res.body);
+          self.emit(":tellWithCard", speechOutput, "Chris' Skill", speechOutput);
+        })
+        .on('error', (err) => {
+          console.log(err);
+        });
+        req.end();
     },
     "HelloIntent": function () {
         var self = this;
