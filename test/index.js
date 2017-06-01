@@ -28,7 +28,7 @@ describe("Testing the HelloIntent", function() {
       "type": "IntentRequest",
       "requestId": "amzn1.echo-api.request.[unique-value-here]",
       "intent": {
-        "name": "AboutIntent",
+        "name": "NextDosageIntent",
       }
     }
     }, ctx);

@@ -4,19 +4,23 @@ var Alexa = require("alexa-sdk");
 var request = require("request");
 var https = require("https");
 var handlers = {
-    "AboutIntent": function () {
+    "NextDosageIntent": function () {
         var self = this;
         var speechOutput;
-        var url = 'https://gcsp-vc-dosage-sched-sim.herokuapp.com/patient/product/dosage?pcpPatientId=1006221&vcProductId=olumiant';
-        const req = https.get(url, (res) => {
-          console.log('statusCode:', res.statusCode);
-          console.log('body:', res.body);
+
+        // Main API Call to the PCP service
+        request('https://gcsp-vc-dosage-sched-sim.herokuapp.com/patient/product/dosage?pcpPatientId=1006221&vcProductId=olumiant', (error, res, body) => {
+          var data = JSON.parse(res.body);
+          var next_dosage_date = data.payload.dosageSetupDate;
+
+          // Convert the date to a human format
+          var d = new Date(0);
+          d.setUTCSeconds(next_dosage_date);
+          speechOutput = "Your next dosage is scheduled for " + d;
+
           self.emit(":tellWithCard", speechOutput, "Chris' Skill", speechOutput);
-        })
-        .on('error', (err) => {
-          console.log(err);
         });
-        req.end();
+
     },
     "HelloIntent": function () {
         var self = this;
