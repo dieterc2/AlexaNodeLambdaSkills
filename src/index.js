@@ -9,7 +9,7 @@ var handlers = {
         var speechOutput;
 
         // Main API Call to the PCP service
-        request('https://gcsp-vc-dosage-sched-sim.herokuapp.com/patient/product/dosage?pcpPatientId=1006221&vcProductId=olumiant', (error, res, body) => {
+        request('https://gcsp-vc-dosage-sched-sim.herokuapp.com/patient/product/dosage?pcpPatientId=XXXXX&vcProductId=olumiant', (error, res, body) => {
           var data = JSON.parse(res.body);
           var next_dosage_date = data.payload.dosageSetupDate;
 
