@@ -21,19 +21,6 @@ var handlers = {
           self.emit(":tellWithCard", speechOutput, "Chris' Skill", speechOutput);
         });
 
-    },
-    "HelloIntent": function () {
-        var self = this;
-        var intentRequest = self.event.request;
-        var value = intentRequest.intent.slots.value;
-        var speechOutput = "";
-        if (value.toLowerCase() == "hello") {
-            speechOutput = "The translation is hola";
-        }
-        else {
-            speechOutput = "I did not understand this request";
-        }
-        self.emit(":tellWithCard", speechOutput, "Chris' Skill", speechOutput);
     }
 };
 var Handler = (function () {
